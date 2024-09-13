@@ -6,11 +6,11 @@ type TireSt struct {
 }
 
 type node struct {
-	val  interface{}
+	val  any
 	next []*node
 }
 
-func newNode(val interface{}, R int) *node {
+func newNode(val any, R int) *node {
 	return &node{
 		val:  val,
 		next: make([]*node, R),
@@ -20,7 +20,7 @@ func newNode(val interface{}, R int) *node {
 func NewTireSt(R int) *TireSt {
 	return &TireSt{R: R}
 }
-func (t *TireSt) Get(key string) interface{} {
+func (t *TireSt) Get(key string) any {
 	x := t.get(t.Root, key, 0)
 	if x == nil {
 		return nil
@@ -38,11 +38,11 @@ func (t *TireSt) get(root *node, key string, d int) *node {
 	return t.get(root.next[c], key, d+1)
 }
 
-func (t *TireSt) Put(key string, val interface{}) {
+func (t *TireSt) Put(key string, val any) {
 	t.Root = t.put(t.Root, key, val, 0)
 }
 
-func (t *TireSt) put(root *node, key string, val interface{}, d int) *node {
+func (t *TireSt) put(root *node, key string, val any, d int) *node {
 	if root == nil {
 		root = newNode(nil, t.R)
 	}
